@@ -32,6 +32,7 @@ function preload ()
     this.load.image('table', '../assets/table.png');
     this.load.image('plant', '../assets/plant.png');
     this.load.image('cat', '../assets/cat.png');
+    this.load.spritesheet('greenwalker', '../assets/Greenwalking1.png', { frameWidth: 193, frameHeight: 250 });
 
 }
 
@@ -40,11 +41,12 @@ function create ()
     this.add.image(400, 300, 'floor');
 
     //init player model
-    player = this.physics.add.image(400, 300, 'intern').setScale(0.25);
+    player = this.physics.add.sprite(400, 300, 'intern').setScale(0.25);
 
     player.setDamping(true);
     player.setDrag(0.1);
     player.setMaxVelocity(200);
+    player.setCollideWorldBounds(true);
 
     cursors = this.input.keyboard.createCursorKeys();
 
@@ -56,6 +58,14 @@ function create ()
 
 
     this.physics.add.collider(player, platforms);
+
+    this.anims.create({
+        key: 'up',
+        frames: this.anims.generateFrameNumbers('greenwalker',{ start: 0, end:2}),
+        frameRate: 10,
+        repeat: -1
+        }
+    );
 }
 
 function update ()
@@ -63,6 +73,7 @@ function update ()
     if (cursors.up.isDown)
     {
         this.physics.velocityFromRotation(player.rotation, 200, player.body.acceleration);
+        // player.anims.play('up', true);
     }
     else
     {
