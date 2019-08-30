@@ -20,10 +20,12 @@ var game = new Phaser.Game(config);
 
 function preload ()
 {
+    this.load.image('floor', '../assets/floor.png');
 }
 
 function create ()
 {
+    this.add.image(400, 300, 'floor');
 }
 
 function update ()
