@@ -28,7 +28,9 @@ function preload ()
 {
     this.load.image('floor', '../assets/floor.png');
     this.load.image('girl', '../assets/sprite_girl.png');
-    this.load.image('chair', '../assets/icon.png');
+    this.load.image('table', '../assets/table.png');
+    this.load.image('plant', '../assets/plant.png');
+    this.load.image('cat', '../assets/cat.png');
     this.load.image('ship', '../assets/Turtle.png');
 
 }
@@ -48,9 +50,10 @@ function create ()
 
     platforms = this.physics.add.staticGroup();
 
-    platforms.create(600, 400, 'icon').setScale(3).refreshBody();
-    platforms.create(50, 250, 'icon');
-    platforms.create(750, 220, 'icon');
+    platforms.create(600, 400, 'table').setScale(0.4).refreshBody();
+    platforms.create(120, 250, 'plant').setScale(0.3).refreshBody();
+    platforms.create(750, 220, 'cat').setScale(0.1).refreshBody();
+
 
     this.physics.add.collider(player, platforms);
 }
