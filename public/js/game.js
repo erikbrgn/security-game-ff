@@ -32,7 +32,7 @@ function preload ()
     this.load.image('table', '../assets/table.png');
     this.load.image('plant', '../assets/plant.png');
     this.load.image('cat', '../assets/cat.png');
-    this.load.spritesheet('greenwalker', '../assets/Greenwalking1.png', { frameWidth: 32, frameHeight: 250 });
+    this.load.spritesheet('greenwalker', '../assets/Greenwalking1.png', { frameWidth: 193, frameHeight: 250 });
 
 }
 
