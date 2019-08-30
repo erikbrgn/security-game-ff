@@ -29,7 +29,7 @@ function preload ()
     this.load.image('floor', '../assets/floor.png');
     this.load.image('girl', '../assets/sprite_girl.png');
     this.load.image('chair', '../assets/icon.png');
-    this.load.image('ship', '../assets/Turtle.png');
+    this.load.image('ship', '../assets/intern.png');
 
 }
 
@@ -38,10 +38,10 @@ function create ()
     this.add.image(400, 300, 'floor');
 
     //init player model
-    player = this.physics.add.image(400, 300, 'ship');
+    player = this.physics.add.image(400, 300, 'ship').setScale(0.25);
 
     player.setDamping(true);
-    player.setDrag(0.99);
+    player.setDrag(0.1);
     player.setMaxVelocity(200);
 
     cursors = this.input.keyboard.createCursorKeys();
