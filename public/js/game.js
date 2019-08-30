@@ -2,26 +2,27 @@ var config = {
     type: Phaser.AUTO,
     width: 800,
     height: 600,
+    physics: {
+        default: 'arcade',
+        arcade: {
+            gravity: {
+                x: 0,
+                y: 0
+            },
+            debug: true
+        }
+    },
     scene: {
         preload: preload,
         create: create,
         update: update
-    },
-    physics: {
-        default: 'matter',
-        matter: {
-            gravity: {
-                x: 0,
-                y: 0
-            }
-        }
     }
 };
 
 var game = new Phaser.Game(config);
-var player;
 var cursors;
 var platforms;
+var player;
 
 function preload ()
 {
@@ -37,13 +38,17 @@ function create ()
     this.add.image(400, 300, 'floor');
 
     //init player model
-    player = this.matter.add.image(400, 300, 'ship')
+    player = this.physics.add.image(400, 300, 'ship');
+
+    player.setDamping(true);
+    player.setDrag(0.99);
+    player.setMaxVelocity(200);
 
     cursors = this.input.keyboard.createCursorKeys();
 
     platforms = this.physics.add.staticGroup();
 
-    platforms.create(600, 400, 'icon');
+    platforms.create(600, 400, 'icon').setScale(3).refreshBody();
     platforms.create(50, 250, 'icon');
     platforms.create(750, 220, 'icon');
 
@@ -52,21 +57,29 @@ function create ()
 
 function update ()
 {
-
+    if (cursors.up.isDown)
+    {
+        this.physics.velocityFromRotation(player.rotation, 200, player.body.acceleration);
+    }
+    else
+    {
+        player.setAcceleration(0);
+    }
 
     if (cursors.left.isDown)
     {
-        player.setAngularVelocity(-0.1);
+        player.setAngularVelocity(-300);
     }
     else if (cursors.right.isDown)
     {
-        player.setAngularVelocity(0.1);
+        player.setAngularVelocity(300);
     }
-
-    if (cursors.up.isDown)
+    else
     {
-        player.thrust(0.08);
+        player.setAngularVelocity(0);
     }
 
+
+    this.physics.world.wrap(player, 32);
 
 }
