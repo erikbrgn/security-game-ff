@@ -1,0 +1,24 @@
+{
+  "name": "smyg",
+  "version": "0.0.1",
+  "description": "Secret game for funky friday",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "http-server -o"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erikbrgn/smyg.git"
+  },
+  "author": "Axis patrol",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/erikbrgn/smyg/issues"
+  },
+  "homepage": "https://github.com/erikbrgn/smyg#readme",
+  "devDependencies": {
+    "http-server": "^0.11.1",
+    "phaser": "^3.19.0"
+  }
+}
