@@ -28,11 +28,10 @@ function preload ()
 {
     this.load.image('floor', '../assets/floor.png');
     this.load.image('girl', '../assets/sprite_girl.png');
-    this.load.image('ship', '../assets/intern.png');
+    this.load.image('intern', '../assets/intern.png');
     this.load.image('table', '../assets/table.png');
     this.load.image('plant', '../assets/plant.png');
     this.load.image('cat', '../assets/cat.png');
-    this.load.image('ship', '../assets/Turtle.png');
 
 }
 
@@ -41,7 +40,7 @@ function create ()
     this.add.image(400, 300, 'floor');
 
     //init player model
-    player = this.physics.add.image(400, 300, 'ship').setScale(0.25);
+    player = this.physics.add.image(400, 300, 'intern').setScale(0.25);
 
     player.setDamping(true);
     player.setDrag(0.1);
