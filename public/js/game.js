@@ -23,6 +23,7 @@ var game = new Phaser.Game(config);
 var cursors;
 var platforms;
 var player;
+var cameraAreas;
 
 function preload ()
 {
@@ -33,6 +34,11 @@ function preload ()
     this.load.image('plant', '../assets/plant.png');
     this.load.image('cat', '../assets/cat.png');
     this.load.spritesheet('greenwalker', '../assets/Greenwalking1.png', { frameWidth: 193, frameHeight: 250 });
+    this.load.image('ship', '../assets/Turtle.png');
+    this.load.image('triangle-left', '../assets/triangle-left.png');
+    this.load.image('triangle-right', '../assets/triangle-right.png');
+    this.load.image('stairs', '../assets/stairs.png');
+
 
 }
 
@@ -51,13 +57,19 @@ function create ()
     cursors = this.input.keyboard.createCursorKeys();
 
     platforms = this.physics.add.staticGroup();
+    cameraAreas = this.physics.add.staticGroup();
 
-    platforms.create(600, 400, 'table').setScale(0.4).refreshBody();
-    platforms.create(120, 250, 'plant').setScale(0.3).refreshBody();
-    platforms.create(750, 220, 'cat').setScale(0.1).refreshBody();
+
+    platforms.create(600, 500, 'table').setScale(0.4).refreshBody();
+    platforms.create(120, 200, 'plant').setScale(0.3).refreshBody();
+    platforms.create(400, 150, 'cat').setScale(0.09).refreshBody();
+    platforms.create(250, 50, 'stairs').setScale(0.3).refreshBody();
+    cameraAreas.create(150, 400, 'triangle-left').setScale(0.8).refreshBody();
+    cameraAreas.create(650, 160, 'triangle-right').setScale(0.8).refreshBody();
 
 
     this.physics.add.collider(player, platforms);
+
 
     this.anims.create({
         key: 'up',
@@ -66,6 +78,9 @@ function create ()
         repeat: -1
         }
     );
+
+    this.physics.add.overlap(player, cameraAreas);
+
 }
 
 function update ()
