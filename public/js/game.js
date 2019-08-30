@@ -8,10 +8,12 @@ var config = {
         update: update
     },
     physics: {
-        default: 'arcade',
-        arcade: {
-            gravity: { y: 0 },
-            debug: false
+        default: 'matter',
+        matter: {
+            gravity: {
+                x: 0,
+                y: 0
+            }
         }
     }
 };
@@ -23,30 +25,16 @@ var cursors;
 function preload ()
 {
     this.load.image('floor', '../assets/floor.png');
-    this.load.image('girl', '../assets/sprite_girl.png');
+    this.load.image('ship', '../assets/Turtle.png');
 
 }
 
 function create ()
 {
     this.add.image(400, 300, 'floor');
+
     //init player model
-    player = this.physics.add.sprite(100, 100, 'girl');
-
-    this.anims.create({
-        key: 'left',
-        frames: this.anims.generateFrameNumbers('girl', { start: 0, end: 0 }),
-        frameRate: 10,
-        repeat: -1
-    });
-
-    this.anims.create({
-        key: 'right',
-        frames: this.anims.generateFrameNumbers('girl', { start: 0, end: 0 }),
-        frameRate: 10,
-        repeat: -1
-    });
-
+    player = this.matter.add.image(400, 300, 'ship')
 
     cursors = this.input.keyboard.createCursorKeys();
 
@@ -58,19 +46,17 @@ function update ()
 
     if (cursors.left.isDown)
     {
-        player.setVelocityX(-160);
-
-        player.anims.play('left', true);
+        player.setAngularVelocity(-0.1);
     }
-
-    if (cursors.right.isDown)
+    else if (cursors.right.isDown)
     {
-        player.setVelocityX(160);
-
-        player.anims.play('right', true);
+        player.setAngularVelocity(0.1);
     }
 
+    if (cursors.up.isDown)
+    {
+        player.thrust(0.08);
+    }
 
-
-
+                    
 }
