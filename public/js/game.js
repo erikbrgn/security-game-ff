@@ -21,10 +21,13 @@ var config = {
 var game = new Phaser.Game(config);
 var player;
 var cursors;
+var platforms;
 
 function preload ()
 {
     this.load.image('floor', '../assets/floor.png');
+    this.load.image('girl', '../assets/sprite_girl.png');
+    this.load.image('chair', '../assets/icon.png');
     this.load.image('ship', '../assets/Turtle.png');
 
 }
@@ -38,6 +41,13 @@ function create ()
 
     cursors = this.input.keyboard.createCursorKeys();
 
+    platforms = this.physics.add.staticGroup();
+
+    platforms.create(600, 400, 'icon');
+    platforms.create(50, 250, 'icon');
+    platforms.create(750, 220, 'icon');
+
+    this.physics.add.collider(player, platforms);
 }
 
 function update ()
@@ -58,5 +68,5 @@ function update ()
         player.thrust(0.08);
     }
 
-                    
+
 }
